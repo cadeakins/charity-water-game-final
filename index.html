@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Water Game</title>
+    <!-- Google Fonts: Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to the Charity Water Game Prototype</h1>
+    <div id="game-container">
+        <!-- Drill and background area -->
+        <div id="background-area">
+            <button id="dig-btn">Keep Tapping To Dig!</button>
+            <img id="drill" src="img/Drill.png" alt="Drill" />
+            <!-- Info bubble will be shown here -->
+            <div id="info-bubble"></div>
+        </div>
+    </div>
+    <!-- Victory screen, hidden by default -->
+    <div id="victory-screen" style="display:none;">
+        <h2>Congratulations! You reached water!</h2>
+        <p>Thank you for playing and supporting clean water access.</p>
+        <a href="https://www.charitywater.org/donate" target="_blank" class="victory-link">Donate to charity: water</a>
+        <a href="https://www.charitywater.org/about" target="_blank" class="victory-link">Learn more about charity: water</a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

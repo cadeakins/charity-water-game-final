@@ -1,0 +1,126 @@
+/* Charity: water Brand Colors
+
+Primary Colors:
+- Yellow:     #FFC907
+- Blue:       #2E9DF7
+
+Secondary Colors:
+- Light Blue: #8BD1CB
+- Green:      #4FCB53
+- Orange:     #FF902A
+- Red:        #F5402C
+- Dark Green: #159A48
+- Pink:       #F16061
+
+*/
+
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  justify-content: center;
+  text-align: center;
+}
+
+#game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+#background-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  aspect-ratio: 3 / 4; /* Always keep 3:4 ratio */
+  margin-bottom: 20px;
+  background-image: url("img/Full Layers BG.png");
+  background-size: contain; /* Fill the whole area, no white space */
+  background-repeat: no-repeat;
+  background-position: bottom;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+#drill {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+  width: 60px;
+  z-index: 2;
+  transition: top 0.3s;
+}
+
+#dig-btn {
+  position: absolute;
+  top: 0.5em;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: #FFC907;
+  color: #222;
+  border: none;
+  border-radius: 24px;
+  padding: 18px 36px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  margin-bottom: 0;
+  transition: background 0.2s;
+}
+#dig-btn:hover {
+  background: #FFD84A;
+}
+
+#info-bubble {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  background: #FFC907;
+  color: #222;
+  padding: 12px 20px;
+  border-radius: 16px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  min-width: 220px;
+  text-align: center;
+  display: none;
+  z-index: 3;
+}
+
+#victory-screen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+#victory-screen h2 {
+  color: #159A48;
+}
+.victory-link {
+  display: block;
+  margin: 12px 0;
+  background: #FFC907;
+  color: #222;
+  padding: 12px 24px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.victory-link:hover {
+  background: #FFD84A;
+}
