@@ -4,10 +4,10 @@ console.log('JavaScript file is linked correctly.');
 // Game variables
 const layers = [
   { name: 'Grass', clicksNeeded: 10 },
-  { name: 'Topsoil', clicksNeeded: 13 },
-  { name: 'Clay', clicksNeeded: 15 },
-  { name: 'Rock', clicksNeeded: 20 },
-  { name: 'Hard Rock', clicksNeeded: 25 },
+  { name: 'Topsoil', clicksNeeded: 30 },
+  { name: 'Clay', clicksNeeded: 50 },
+  { name: 'Rock', clicksNeeded: 70 },
+  { name: 'Hard Rock', clicksNeeded: 100 },
   { name: 'Water', clicksNeeded: 0 } // Last layer, win on entry
 ];
 let currentLayer = 0; // Start at the top layer
@@ -30,6 +30,7 @@ const digBtn = document.getElementById('dig-btn');
 const drill = document.getElementById('drill');
 const infoBubble = document.getElementById('info-bubble');
 const victoryScreen = document.getElementById('victory-screen');
+const clickCount = document.getElementById('click-count');
 
 // Show an info bubble with a message
 function showInfoBubble(message) {
@@ -56,12 +57,12 @@ function handleDig() {
   clicks++;
   // Show a debug message
   console.log(`Clicked! Layer: ${layers[currentLayer].name}, Clicks: ${clicks}`);
+  clickCount.textContent = `Clicks: ${clicks}`; // Update the click count text
 
   // Check if enough clicks to go to next layer
   if (clicks >= layers[currentLayer].clicksNeeded) {
     // Go to next layer
     currentLayer++;
-    clicks = 0;
     // Move the drill down
     moveDrill(currentLayer);
     // Show info bubble for this layer, if available
