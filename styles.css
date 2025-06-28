@@ -108,6 +108,10 @@ h1 {
   transition: background 0.2s;
   white-space: nowrap; /* Prevent text wrapping */
 }
+.difficulty-btn,
+#dig-btn {
+  touch-action: manipulation; /* Prevents double-tap zoom on mobile */
+}
 #dig-btn:hover {
   background: #FFD84A;
 }
