@@ -30,22 +30,24 @@ h1 {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  width: 100vw;
+  /*width: 100vw;*/
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 
 #background-area {
   position: relative;
   width: 100%;
   height: 100%;
-  max-width: 400px;
-  aspect-ratio: 3 / 4; /* Always keep 3:4 ratio */
+  max-width: 350px;
+  aspect-ratio: 9 / 16; /* Always keep 3:4 ratio */
   margin-bottom: 20px;
   background-image: url("img/Full Layers BG.png");
-  background-size: contain; /* Fill the whole area, no white space */
+  background-size: cover; /* Fill the whole area, no white space */
   background-repeat: no-repeat;
   background-position: bottom;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.7);
+  border-radius: 24px;
 }
 
 #drill {
@@ -100,7 +102,7 @@ h1 {
 #victory-screen {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.95);
+  background: rgba(204, 56, 56, 0.85);
   display: flex;
   flex-direction: column;
   align-items: center;

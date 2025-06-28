@@ -14,7 +14,7 @@ let currentLayer = 0; // Start at the top layer
 let clicks = 0; // Clicks in current layer
 
 // Drill positions for each layer (in px from top)
-const drillPositions = [130, 180, 220, 290, 340, 430];
+const drillPositions = [160, 180, 220, 290, 340, 430];
 
 // Info bubbles to show at different stages
 const infoBubbles = [
