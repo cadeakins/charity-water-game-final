@@ -216,4 +216,17 @@ h1 {
   #info-bubble {
     font-size: clamp(1.5rem, 2vw, 3rem); /* Scales font size */
   }
+  .victory-text {
+    font-size: clamp(1.5rem, 2vw, 3rem); /* Scales font size */ 
+  }
+  #victory-screen a {
+    font-size: clamp(1.2rem, 1.5vw, 2rem); /* Scales font size */
+  }
+}
+
+@media (max-width: 599px) {
+  #victory-screen img {
+    width: 80%; /* Scale down image for smaller screens */
+    max-width: 300px; /* Limit maximum width */
+  }
 }
