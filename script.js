@@ -13,8 +13,8 @@ const layers = [
 let currentLayer = 0; // Start at the top layer
 let clicks = 0; // Clicks in current layer
 
-// Drill positions for each layer (in px from top)
-const drillPositions = [160, 250, 320, 410, 450, 500];
+// Percent positions for each layer (0 = top, 1 = bottom)
+const drillPositionPercents = [0.265, 0.39, 0.5, 0.66, 0.72, 0.8];
 
 // Info bubbles to show at different stages
 const infoBubbles = [
@@ -67,9 +67,16 @@ function showInfoBubble(message) {
 
 // Move the drill down visually
 function moveDrill(layerIndex) {
+  // Get the height of the background area
+  const bgHeight = backgroundArea.offsetHeight;
+
+  // Calculate the top position as a percentage of the background height
+  const percent = drillPositionPercents[layerIndex];
+  const topPx = bgHeight * percent;
+
   // Move the drill image to the correct position
-  drill.style.top = `${drillPositions[layerIndex]}px`;
-  originalTop = drillPositions[layerIndex]; // Update the original top position
+  drill.style.top = `${topPx}px`;
+  originalTop = topPx; // Update the original top position for animation
   offset = 0; // Reset the offset so the drill doesn't jump
   drill.style.top = `${originalTop}px`; // Ensure drill is at the correct position
 }
@@ -77,7 +84,7 @@ function moveDrill(layerIndex) {
 let drillAnimationInterval = null; // To store the interval ID
 let drillAnimationTimeout = null;  // To store the timeout ID
 let drillIsAnimating = false;      // Track if animation is running
-let originalTop = drillPositions[0]; // Start at the first layer
+let originalTop = drillPositionPercents[0]; // Start at the first layer
 let offset = 0;
 
 function startDrillAnimation() {
@@ -175,3 +182,8 @@ digBtn.addEventListener('click', handleDig);
 
 // Initial setup
 moveDrill(0);
+
+// Update drill position on window resize
+window.addEventListener('resize', () => {
+  moveDrill(currentLayer);
+});

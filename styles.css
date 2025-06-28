@@ -173,3 +173,19 @@ h1 {
   height: 20px; /* Adjust height as needed */
   margin-left: 8px; /* Add some space from the left */
 }
+
+@media (min-width: 600px) and (max-width: 1024px) {
+  #background-area {
+    max-width: 550px; /* Increase width for larger screens */
+    aspect-ratio: 9 / 16; /* Always keep 3:4 ratio */
+  }
+  #drill {
+    width: clamp(60px, 17vw, 90px); /* Responsive width */
+  }
+  #dig-btn {
+    font-size: clamp(2rem, 2vw, 3rem); /* Scales font size */
+  }
+  #info-bubble {
+    font-size: clamp(1.5rem, 2vw, 3rem); /* Scales font size */
+  }
+}
