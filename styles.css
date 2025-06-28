@@ -111,6 +111,7 @@ h1 {
 .difficulty-btn,
 #dig-btn {
   touch-action: manipulation; /* Prevents double-tap zoom on mobile */
+  font-size: 16px; /* Base font size */
 }
 #dig-btn:hover {
   background: #FFD84A;
