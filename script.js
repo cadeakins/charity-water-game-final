@@ -18,8 +18,8 @@ const drillPositions = [160, 250, 320, 400, 450, 500];
 
 // Info bubbles to show at different stages
 const infoBubbles = [
+  '703 million people lack access to clean water worldwide.',
   'charity: water has helped 20.3 million people gain access to safe drinking water.',
-  '771 million people lack access to clean water worldwide.',
   'Every $40 can bring clean water to one person.',
   'Clean water changes everything: health, education, and income.',
   'Water is life. It\'s essential for survival and development.',
@@ -49,10 +49,62 @@ function showInfoBubble(message) {
 function moveDrill(layerIndex) {
   // Move the drill image to the correct position
   drill.style.top = `${drillPositions[layerIndex]}px`;
+  originalTop = drillPositions[layerIndex]; // Update the original top position
+  offset = 0; // Reset the offset so the drill doesn't jump
+  drill.style.top = `${originalTop}px`; // Ensure drill is at the correct position
+}
+
+let drillAnimationInterval = null; // To store the interval ID
+let drillAnimationTimeout = null;  // To store the timeout ID
+let drillIsAnimating = false;      // Track if animation is running
+let originalTop = drillPositions[0]; // Start at the first layer
+let offset = 0;
+
+function startDrillAnimation() {
+  if (drillIsAnimating) {
+    resetDrillAnimationTimeout();
+    return;
+  }
+
+  drillIsAnimating = true;
+  let direction = 1;
+
+  drillAnimationInterval = setInterval(() => {
+    // Move drill up and down by 8px
+    offset += direction * 5;
+    if (offset > 10 || offset < -10) {
+      direction *= -1; // Change direction
+    }
+    drill.style.top = `${originalTop + offset}px`;
+  }, 25);
+
+  resetDrillAnimationTimeout();
+}
+
+function resetDrillAnimationTimeout() {
+  // Clear any previous timeout
+  if (drillAnimationTimeout) {
+    clearTimeout(drillAnimationTimeout);
+  }
+  // Stop animation after 1.5 seconds of no clicks
+  drillAnimationTimeout = setTimeout(stopDrillAnimation, 1500);
+}
+
+function stopDrillAnimation() {
+  if (drillAnimationInterval) {
+    clearInterval(drillAnimationInterval);
+    drillAnimationInterval = null;
+  }
+  drillIsAnimating = false;
+  // Reset drill to its correct position for the current layer
+  moveDrill(currentLayer);
 }
 
 // Handle dig button click
 function handleDig() {
+  // Start or continue the drill animation
+  startDrillAnimation();
+
   // Add one click
   clicks++;
   // Show a debug message
@@ -69,10 +121,13 @@ function handleDig() {
     if (infoBubbles[currentLayer]) {
       showInfoBubble(infoBubbles[currentLayer]);
     }
+
     // If reached water, show victory screen
     if (layers[currentLayer].name === 'Water') {
       digBtn.style.display = 'none';
-      victoryScreen.style.display = 'flex';
+      setTimeout(() => {
+        victoryScreen.classList.add('show'); // Show the victory screen
+      }, 2000); // Wait 2 seconds before showing victory screen
     }
   }
 }
