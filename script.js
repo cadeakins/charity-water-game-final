@@ -2,16 +2,19 @@
 console.log('JavaScript file is linked correctly.');
 
 // Game variables
-const layers = [
-  { name: 'Grass', clicksNeeded: 10 },
-  { name: 'Topsoil', clicksNeeded: 30 },
-  { name: 'Clay', clicksNeeded: 50 },
-  { name: 'Rock', clicksNeeded: 70 },
-  { name: 'Hard Rock', clicksNeeded: 100 },
-  { name: 'Water', clicksNeeded: 0 } // Last layer, win on entry
-];
+let layers = [];
 let currentLayer = 0; // Start at the top layer
 let clicks = 0; // Clicks in current layer
+
+// Difficulty settings
+const difficultySettings = {
+  easy:    [10, 20, 30, 40, 50],
+  normal:  [10, 30, 50, 70, 100],
+  hard:    [20, 50, 80, 120, 180]
+};
+
+// Layer names
+const layerNames = ['Grass', 'Topsoil', 'Clay', 'Rock', 'Hard Rock', 'Water'];
 
 // Percent positions for each layer (0 = top, 1 = bottom)
 const drillPositionPercents = [0.265, 0.39, 0.5, 0.66, 0.72, 0.8];
@@ -34,6 +37,7 @@ const clickCount = document.getElementById('click-count');
 const digSound = new Audio('sounds/dig_sound.wav');
 const waterSound = new Audio('sounds/water_sound.wav');
 const backgroundArea = document.getElementById('background-area');
+const difficultyOverlay = document.getElementById('difficulty-overlay');
 
 const layerImages = [
   'img/Full Layers BG.png', // Grass
@@ -51,6 +55,33 @@ for (let i = 0; i < layerImages.length; i++) {
   img.src = layerImages[i];
   preloadedImages.push(img);
 }
+
+// Set up difficulty selection
+function setDifficulty(difficulty) {
+  // Set up layers array based on difficulty
+  layers = [
+    { name: 'Grass', clicksNeeded: difficultySettings[difficulty][0] },
+    { name: 'Topsoil', clicksNeeded: difficultySettings[difficulty][1] },
+    { name: 'Clay', clicksNeeded: difficultySettings[difficulty][2] },
+    { name: 'Rock', clicksNeeded: difficultySettings[difficulty][3] },
+    { name: 'Hard Rock', clicksNeeded: difficultySettings[difficulty][4] },
+    { name: 'Water', clicksNeeded: 0 }
+  ];
+  currentLayer = 0;
+  clicks = 0;
+  clickCount.textContent = `Clicks: 0`;
+  moveDrill(0);
+  digBtn.disabled = false;
+  difficultyOverlay.style.display = 'none';
+}
+
+// Add event listeners to difficulty buttons
+document.querySelectorAll('.difficulty-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const difficulty = this.getAttribute('data-difficulty');
+    setDifficulty(difficulty);
+  });
+});
 
 // Show an info bubble with a message
 function showInfoBubble(message) {
@@ -129,6 +160,9 @@ function stopDrillAnimation() {
 
 // Handle dig button click
 function handleDig() {
+  // Don't allow clicking if difficulty not selected
+  if (digBtn.disabled) return;
+
   // Start or continue the drill animation
   startDrillAnimation();
 
@@ -149,16 +183,17 @@ function handleDig() {
     // Move the drill down
     moveDrill(currentLayer);
 
+    // Change background for each layer
     if (currentLayer === 1) {
-      backgroundArea.style.backgroundImage = 'url("img/Layer2.png")'; // Change background for Layer 2
+      backgroundArea.style.backgroundImage = 'url("img/Layer2.png")';
     } else if (currentLayer === 2) {
-      backgroundArea.style.backgroundImage = 'url("img/Layer3.png")'; // Change background for Layer 3
+      backgroundArea.style.backgroundImage = 'url("img/Layer3.png")';
     } else if (currentLayer === 3) {
-      backgroundArea.style.backgroundImage = 'url("img/Layer4.png")'; // Change background for Layer 4
+      backgroundArea.style.backgroundImage = 'url("img/Layer4.png")';
     } else if (currentLayer === 4) {
-      backgroundArea.style.backgroundImage = 'url("img/Layer5.png")'; // Change background for Layer 5
+      backgroundArea.style.backgroundImage = 'url("img/Layer5.png")';
     } else if (currentLayer === 5) {
-      backgroundArea.style.backgroundImage = 'url("img/Layer6.png")'; // Change background for Layer 6
+      backgroundArea.style.backgroundImage = 'url("img/Layer6.png")';
     }
 
     // Show info bubble for this layer, if available
@@ -180,7 +215,8 @@ function handleDig() {
 
 digBtn.addEventListener('click', handleDig);
 
-// Initial setup
+// Initial setup: show overlay, disable dig button
+digBtn.disabled = true;
 moveDrill(0);
 
 // Update drill position on window resize

@@ -11,17 +11,22 @@
 <body>
     <h1>Welcome to Drill For Water!</h1>
     <div id="game-container">
+        <!-- Difficulty selection overlay -->
+        <div id="difficulty-overlay">
+            <h2>Select Difficulty</h2>
+            <button class="difficulty-btn" data-difficulty="easy">Easy</button>
+            <button class="difficulty-btn" data-difficulty="normal">Normal</button>
+            <button class="difficulty-btn" data-difficulty="hard">Hard</button>
+        </div>
         <!-- Drill and background area -->
         <div id="background-area">
-
             <div class="top-bar">
               <!-- Charity logo and clicker count -->
               <img id="charity-logo" src="img/cw_logo_horizontal.png" alt="Charity: Water Logo" />
               <!-- Clicker count goes here -->
               <div id="click-count">Clicks: 0</div>
             </div>
-
-            <button id="dig-btn">Keep Tapping To Dig!</button>
+            <button id="dig-btn" disabled>Keep Tapping To Dig!</button>
             <img id="drill" src="img/Drill.png" alt="Drill icon" />
             <!-- Info bubble will be shown here -->
             <div id="info-bubble"></div>
