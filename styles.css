@@ -48,6 +48,7 @@ h1 {
   background-position: bottom;
   box-shadow: 0 4px 16px rgba(0,0,0,0.7);
   border-radius: 24px;
+  overflow: hidden; /*Prevent overflow of content*/
 }
 
 #drill {
@@ -73,15 +74,21 @@ h1 {
   padding: 18px 36px;
   font-size: 1rem;
   font-weight: bold;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   cursor: pointer;
   margin-bottom: 0;
+  margin-top: 40px;
   transition: background 0.2s;
+  white-space: nowrap; /* Prevent text wrapping */
 }
 #dig-btn:hover {
   background: #FFD84A;
 }
 
+#dig-btn:active {
+  background: #FFB800;
+  transform: translateX(-50%) translateY(2px);  /*Button press animation*/
+}
 #info-bubble {
   position: absolute;
   left: 50%;
@@ -95,14 +102,21 @@ h1 {
   box-shadow: 0 2px 8px rgba(0,0,0,0.10);
   min-width: 220px;
   text-align: center;
-  display: none;
+  opacity: 0;                /* Start hidden */
+  pointer-events: none;      /* Not clickable when hidden */
   z-index: 3;
+  transition: opacity 0.4s;  /* Smooth fade */
+}
+
+#info-bubble.show {
+  opacity: 1;                /* Fade in */
+  pointer-events: auto;      /* Clickable when shown */
 }
 
 #victory-screen {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(204, 56, 56, 0.85);
+  background: rgba(254, 255, 244, 0.85);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -125,4 +139,23 @@ h1 {
 }
 .victory-link:hover {
   background: #FFD84A;
+}
+
+.top-bar {
+  display: flex;  /*Arrange in row*/
+  justify-content: space-between; /*Put space between elements*/
+  align-items: center; /*Center vertically*/
+  padding: 8px 16px; /*Add some padding*/
+  background-color: rgba(24, 24, 21, 0.1); /*Background color for the top bar*/
+  margin-bottom: 16px; /*Space below the top bar*/
+}
+
+#click-count {
+  font-size: 1.2rem;
+  color: #222;
+}
+
+#charity-logo {
+  height: 20px; /* Adjust height as needed */
+  margin-left: 8px; /* Add some space from the left */
 }

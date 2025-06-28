@@ -14,7 +14,7 @@ let currentLayer = 0; // Start at the top layer
 let clicks = 0; // Clicks in current layer
 
 // Drill positions for each layer (in px from top)
-const drillPositions = [160, 180, 220, 290, 340, 430];
+const drillPositions = [160, 250, 320, 400, 450, 500];
 
 // Info bubbles to show at different stages
 const infoBubbles = [
@@ -23,7 +23,6 @@ const infoBubbles = [
   'Every $40 can bring clean water to one person.',
   'Clean water changes everything: health, education, and income.',
   'Water is life. It\'s essential for survival and development.',
-  'You did it! You reached water!'
 ];
 
 // Get DOM elements
@@ -34,11 +33,14 @@ const victoryScreen = document.getElementById('victory-screen');
 
 // Show an info bubble with a message
 function showInfoBubble(message) {
+  // Set the message text
   infoBubble.textContent = message;
-  infoBubble.style.display = 'block';
-  // Hide after 3 seconds
+  // Add the 'show' class to fade in
+  infoBubble.classList.add('show');
+
+  // Remove the 'show' class after 3 seconds to fade out
   setTimeout(() => {
-    infoBubble.style.display = 'none';
+    infoBubble.classList.remove('show');
   }, 3000);
 }
 
